@@ -1,0 +1,113 @@
+.block {
+  &-info {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    img {
+      width: 27px;
+    }
+    span {
+      margin-left: 10px;
+    }
+  }
+  &-content {
+    background-color: @white;
+    padding: 20px;
+    position: relative;
+    &-bottom {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+    &-single {
+      border-bottom: 1px solid @border-color;
+      padding: 20px 0;
+      &-item {
+        padding-bottom: 20px;
+        /*  display: flex; */
+        &:last-child {
+          padding-bottom: 0;
+        }
+        .block-content-text,
+        .block-content-light {
+          width: calc(100% - 180px);
+        }
+      }
+    }
+    &-many {
+      flex-wrap: wrap;
+      border-bottom: 1px solid @border-color;
+      display: flex;
+      align-items: center;
+      padding: 20px 0;
+      &-borderNone {
+        /*  flex-wrap: wrap;
+        display: flex; */
+        align-items: center;
+      }
+      &-item {
+        /* width: 50%;
+        display: flex;
+        */
+        align-items: center;
+      }
+    }
+    &-label {
+      display: block;
+      /*  width: 170px;
+      text-align: right; */
+      padding-bottom: 10px;
+      color: @text-second;
+    }
+    &-text {
+      margin-left: 10px;
+      word-wrap: break-word;
+      word-break: normal;
+    }
+    &-light {
+      margin-left: 10px;
+      word-wrap: break-word;
+      word-break: normal;
+      color: @text-light;
+    }
+    &-img {
+      width: 35px;
+      margin-left: 10px;
+    }
+    &-bold {
+      font-size: @font-size-20;
+    }
+    &-right {
+      display: none;
+      position: absolute;
+      width: 200px;
+      right: -200px;
+      top: 0;
+      color: @white;
+      text-align: center;
+      &-header {
+        color: @white;
+        background-color: #9cc1ff;
+        padding: 10px;
+        margin: 0;
+      }
+      &-item {
+        background-color: @text-light;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        &:first-child {
+          border-bottom: 2px solid #9cc1ff;
+        }
+        span {
+          display: block;
+        }
+      }
+    }
+  }
+  .ant-table-thead {
+    display: none;
+  }
+}
+
+.padding-bootom-20 {
+  padding-bottom: 20px;
+}

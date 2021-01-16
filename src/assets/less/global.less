@@ -1,0 +1,149 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+body {
+  overflow: hidden;
+  .jv-container .jv-tooltip {
+    top: -2px;
+  }
+}
+strong {
+  font-weight: normal;
+}
+//
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.5s;
+}
+.page-enter,
+.page-leave-active {
+  opacity: 0;
+}
+/*  */
+.ant-layout {
+  min-height: 100vh;
+  font-family: acumin-pro, sans-serif, Arial, 'Times New Roman', Georgia, serif;
+  font-weight: 400;
+  line-height: 1.5em;
+  font-size: @font-size-base;
+  color: @text-color;
+  .ant-layout-header {
+    padding: 0;
+    height: auto;
+    line-height: 1.5em;
+    background: url(../image/header.png) no-repeat center;
+    background-size: 100% 100%;
+  }
+  .ant-layout-content {
+    background-color: @main-backColor;
+  }
+  .ant-layout-footer {
+    padding: 0;
+    background-color: @primary-color;
+  }
+  .lick-active {
+    border-bottom: 2px solid #55586f;
+    color: #55586f;
+    font-weight: bold;
+  }
+  .Copy {
+    padding: 3px 10px;
+    border: 1px solid #d6ddea;
+    color: #7a889f;
+    border-radius: 3px;
+    cursor: pointer;
+    margin: 0 10px;
+    font-size: 14px;
+  }
+  input::-webkit-input-placeholder {
+    color: #acbcd8;
+  }
+  input::-moz-input-placeholder {
+    color: #acbcd8;
+  }
+  input::-ms-input-placeholder {
+    color: #acbcd8;
+  }
+  .ant-input {
+    height: 35px;
+    line-height: 35px;
+  }
+  .ant-btn {
+    height: 35px;
+    line-height: 35px;
+  }
+  .ant-table-thead > tr > th {
+    background-color: @text-light;
+    color: @white;
+  }
+  .anticon-search {
+    font-size: 25px;
+    cursor: pointer;
+  }
+  .global-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    box-shadow: 0 0 10px @primary-color;
+    width: 100%;
+    background-color: @primary-color;
+  }
+  .ant-skeleton-content {
+    padding: 20px;
+    background-color: @white;
+  }
+}
+.noData {
+  background-color: @white;
+  text-align: center;
+  height: 400px;
+  padding: 30px;
+  img {
+    width: 300px;
+  }
+}
+.main-width {
+  width: @main-width;
+  margin: auto;
+}
+.mobile {
+  display: none;
+}
+@media screen and (@max992) {
+  .ant-layout .computer {
+    display: none;
+  }
+  .ant-layout .mobile {
+    display: block;
+  }
+}
+.ant-table-pagination.ant-pagination {
+  float: none;
+  text-align: center;
+  .ant-pagination-item {
+    min-width: 25px;
+  }
+}
+.mainBox {
+  position: relative;
+  &-right {
+    position: absolute;
+    right: 0;
+    width: 70px;
+    line-height: 1.5em;
+    font-size: 12px;
+    top: 1px;
+    text-align: center;
+    color: #fff;
+    cursor: pointer;
+    &_blue {
+      background-color: @primary-color;
+      margin-bottom: 10px;
+    }
+    &_orange {
+      background-color: #ff6262;
+    }
+  }
+}
