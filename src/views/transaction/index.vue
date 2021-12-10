@@ -2,7 +2,7 @@
  * @Author: abc
  * @Date: 2020-12-04 18:24:31
  * @LastEditors: abc
- * @LastEditTime: 2021-01-11 18:28:49
+ * @LastEditTime: 2021-05-26 18:54:07
  * @Description: Transaction Details
 -->
 <template>
@@ -18,15 +18,14 @@
             }}</label>
             <span class="block-content-light">
               {{ transactionHistory.txhash }}
-              <span
+              <a-icon
+                type="copy"
+                class="copy"
                 v-if="transactionHistory.txhash"
-                class="Copy"
                 v-clipboard:copy="transactionHistory.txhash"
                 v-clipboard:success="onCopy"
                 v-clipboard:error="onError"
-              >
-                {{ $t('share') }}
-              </span>
+              />
             </span>
           </div>
           <div class="block-content-single-item" style="display: none;">
@@ -70,17 +69,16 @@
             <label class="block-content-label">{{
               $t('wallet.address')
             }}</label>
-            <span class="block-content-text"
+            <span class="block-content-text" v-if="transactionHistory.sender_id"
               >{{ transactionHistory.sender_id }}
-              <span
+              <a-icon
+                type="copy"
+                class="copy"
                 v-if="transactionHistory.sender_id"
-                class="Copy"
                 v-clipboard:copy="transactionHistory.sender_id"
                 v-clipboard:success="onCopy"
                 v-clipboard:error="onError"
-              >
-                {{ $t('share') }}
-              </span>
+              />
             </span>
           </div>
           <div class="block-content-single-item">

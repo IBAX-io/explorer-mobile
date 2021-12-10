@@ -2,7 +2,7 @@
  * @Author: abc
  * @Date: 2020-11-03 15:30:47
  * @LastEditors: abc
- * @LastEditTime: 2020-12-28 14:05:40
+ * @LastEditTime: 2021-05-26 18:41:40
  * @Description  Icons +Outline
  */
 export {
@@ -43,5 +43,6 @@ export {
   TwitterOutline,
   GooglePlusOutline,
   LinkedinOutline,
-  UnorderedListOutline
+  UnorderedListOutline,
+  CopyOutline
 } from '@ant-design/icons';

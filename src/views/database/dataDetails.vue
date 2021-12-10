@@ -2,7 +2,7 @@
  * @Author: abc
  * @Date: 2020-12-11 14:18:24
  * @LastEditors: abc
- * @LastEditTime: 2020-12-29 18:11:47
+ * @LastEditTime: 2021-11-08 15:25:22
  * @Description:  darabase details
 -->
 <template>
@@ -42,6 +42,7 @@
   </div>
 </template>
 <script>
+import qs from 'qs';
 export default {
   props: {},
   data() {
@@ -54,66 +55,55 @@ export default {
       arrDataHeader: [],
       arrDataContent: [],
       order: 'id',
-      //  Database table header
-      dataHeader: {
-        cmd: '003', //
-        nodeposition: 1, // ID
-        page_size: 100,
-        current_page: 1,
-        order: 'id desc',
-        table_name: 'transactions_status' //
-      },
-      //  Database table content
+      // Database table content
       dataContent: {
-        cmd: '004',
-        nodeposition: 1, // ID
-        page_size: 10,
-        current_page: 1,
+        table_name: '',
+        limit: 10,
+        page: 1,
         order: 'id asc',
-        table_name: 'transactions_status' //
+        where: ''
       },
       pagination: {
         total: 10,
         pageSize: 10,
         defaultPageSize: 1
-      }
+      },
+      objColumns: {
+        table_name: ''
+      },
+      objLoacl: {}
     };
   },
   computed: {},
-  watch: {
-    $route: {
-      handler(newVal) {
-        console.log(newVal.params);
-        const params = newVal.params;
-        this.tableName = this.dataHeader.table_name = params.name;
-        this.dataHeader.current_page = 1;
-        this.dataHeader.nodeposition = parseInt(params.node);
-        console.log(JSON.stringify(this.dataHeader));
-        this.getDataHeader(this.dataHeader);
-      },
-      deep: true,
-      immediate: true
-    }
-  },
+  watch: {},
   created() {
     // this.getDataHeader(this.dataHeader);
   },
-  mounted() {},
+  mounted() {
+    const obj = JSON.parse(localStorage.getItem('baseDetails'));
+    this.objLoacl = obj;
+    this.handleHeaderName(obj);
+  },
   methods: {
-    handlePage({ current }) {
-      this.dataContent.current_page = current;
-      this.handleDataContent(this.dataContent);
-    },
-    //  Database table header
-    async getDataHeader(data) {
-      const res = await this.$http.post('/database', data);
-      // console.log(JSON.stringify(res));
-      if (res.code === 0) {
-        const arrHeader = res.data.data;
-        this.dataHeader.current_page = res.data.current_page;
-        this.dataHeader.total = res.data.total;
-        this.isTable = true;
-        arrHeader.map(item => {
+    async handleHeaderName(obj) {
+      this.isTable = false;
+      this.tableLoading = true;
+      this.objColumns.table_name = obj.tablename;
+      const res = await fetch(`${obj.api_address}/api/v2/open/columnsInfo`, {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: qs.stringify(this.objColumns),
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        mode: 'cors', // no-cors, cors, *same-origin
+        redirect: 'follow', // manual, *follow, error
+        referrer: 'no-referrer' // *client, no-referrer
+      });
+      this.isTable = true;
+      this.tableLoading = false;
+      if (res.ok) {
+        const data = await res.json();
+        data.list.map(item => {
           let obj = {
             title: item.column_name,
             dataIndex: item.column_name,
@@ -122,16 +112,40 @@ export default {
             key: item.column_name,
             scopedSlots: { customRender: item.column_name }
           };
+
           this.arrDataHeader.push(obj);
         });
-        this.dataContent.table_name = data.table_name;
-        this.dataContent.nodeposition = data.nodeposition;
-        const dataContent = this.dataContent;
-        this.handleDataContent(dataContent);
+        this.handleConetentData(obj);
       } else {
-        this.arrDataName = [];
-        this.isTable = false;
+        this.$message.error('request error!');
       }
+    },
+    async handleConetentData(obj, page = 1) {
+      this.dataContent.table_name = obj.tablename;
+      this.dataContent.page = page;
+      const res = await fetch(`${obj.api_address}/api/v2/open/rowsInfo`, {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: qs.stringify(this.dataContent),
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        mode: 'cors', // no-cors, cors, *same-origin
+        redirect: 'follow', // manual, *follow, error
+        referrer: 'no-referrer' // *client, no-referrer
+      });
+      this.isTable = true;
+      this.tableLoading = false;
+      if (res.ok) {
+        const data = await res.json();
+        //  console.log(data);
+        this.arrDataContent = data.list;
+        this.pagination.total = data.count;
+      } else {
+        this.$message.error('request error!');
+      }
+    },
+    handlePage({ current }) {
+      this.handleConetentData(this.objLoacl, current);
     },
     async handleDataContent(data) {
       this.tableLoading = true;

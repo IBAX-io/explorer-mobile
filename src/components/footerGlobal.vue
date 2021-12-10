@@ -2,7 +2,7 @@
  * @Author: abc
  * @Date: 2020-11-06 10:51:35
  * @LastEditors: abc
- * @LastEditTime: 2021-01-12 15:18:05
+ * @LastEditTime: 2021-01-19 09:58:17
  * @Description: footer
 -->
 <template>
@@ -55,10 +55,10 @@
     <div class="footer-bottom">
       <div class="footer-bottom-item">
         <a href=" https://www.facebook.com/ibaxNetwork/" target="_blank">
-          <a-icon type="facebook" />
+          <img src="../assets/image/f.png" alt="f" />
         </a>
         <a href="https://twitter.com/IbaxNetwork" target="_blank">
-          <a-icon type="twitter" />
+          <img src="../assets/image/t.png" alt="t" />
         </a>
         <a
           href="https://www.linkedin.com/company/ibaxio/"
@@ -68,7 +68,7 @@
           <a-icon type="google-plus" />
         </a>
         <a href="https://www.linkedin.com/company/ibaxio/" target="_blank">
-          <a-icon type="linkedin" />
+          <img src="../assets/image/in.png" alt="in" />
         </a>
       </div>
     </div>

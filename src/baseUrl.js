@@ -2,12 +2,11 @@
  * @Author: abc
  * @Date: 2020-12-17 14:28:56
  * @LastEditors: abc
- * @LastEditTime: 2021-01-13 19:05:16
+ * @LastEditTime: 2021-11-08 14:45:26
  * @Description:Interface address
  */
 const baseUrl = {
-  //api: 'https://node23.ibax.io:8800'
-  test: 'https://node22.ibax.io:8800'
-  //main: 'https://sg2.hashold.com:2053'
+  test: 'https://testnet-hk-35-220-223-187.ibax.io:8800',
+  main: 'https://testnet-hk-35-220-223-187.ibax.io:8800'
 };
 module.exports = baseUrl;

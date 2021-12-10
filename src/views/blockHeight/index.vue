@@ -2,7 +2,7 @@
  * @Author: abc
  * @Date: 2020-12-04 18:21:25
  * @LastEditors: abc
- * @LastEditTime: 2021-01-14 17:30:37
+ * @LastEditTime: 2021-05-26 18:48:52
  * @Description: block height details
 -->
 <template>
@@ -43,14 +43,13 @@
             <label class="block-content-label">{{ $t('block.account') }}</label>
             <span class="block-content-text">
               {{ objBlockHeader.key_id }}
-              <span
-                class="Copy"
+              <a-icon
+                type="copy"
+                class="copy"
                 v-clipboard:copy="objBlockHeader.key_id"
                 v-clipboard:success="onCopy"
                 v-clipboard:error="onError"
-              >
-                {{ $t('share') }}
-              </span>
+              />
             </span>
           </div>
           <div class="block-content-many-item">
@@ -114,14 +113,13 @@
             <label class="block-content-label">{{ $t('block.value') }}</label>
             <span class="block-content-light">
               {{ objBlock.hash }}
-              <span
-                class="Copy"
+              <a-icon
+                type="copy"
+                class="copy"
                 v-clipboard:copy="objBlock.hash"
                 v-clipboard:success="onCopy"
                 v-clipboard:error="onError"
-              >
-                {{ $t('share') }}
-              </span>
+              />
             </span>
           </div>
           <div class="block-content-single-item">
@@ -138,28 +136,26 @@
             }}</label>
             <span class="block-content-light">
               {{ objBlock.rollbacks_hash }}
-              <span
-                class="Copy"
+              <a-icon
+                type="copy"
+                class="copy"
                 v-clipboard:copy="objBlock.rollbacks_hash"
                 v-clipboard:success="onCopy"
                 v-clipboard:error="onError"
-              >
-                {{ $t('share') }}
-              </span>
+              />
             </span>
           </div>
           <div class="block-content-single-item">
             <label class="block-content-label">{{ $t('block.root') }}</label>
             <span class="block-content-light">
               {{ objBlock.mrkl_root }}
-              <span
-                class="Copy"
+              <a-icon
+                type="copy"
+                class="copy"
                 v-clipboard:copy="objBlock.mrkl_root"
                 v-clipboard:success="onCopy"
                 v-clipboard:error="onError"
-              >
-                {{ $t('share') }}
-              </span>
+              />
             </span>
           </div>
           <div class="block-content-many-borderNone">

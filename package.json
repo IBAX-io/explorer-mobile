@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve --open",
-    "build": "vue-cli-service build --report",
+    "build": "vue-cli-service build",
     "test:e2e": "vue-cli-service test:e2e",
     "lint": "vue-cli-service lint"
   },
@@ -15,7 +15,7 @@
     "decimal.js": "^10.2.1",
     "echarts": "^4.9.0",
     "moment": "^2.29.1",
-    "qs": "^6.9.4",
+    "qs": "^6.10.1",
     "register-service-worker": "^1.7.1",
     "vue": "^2.6.11",
     "vue-axios-plugin": "^1.3.0",

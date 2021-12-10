@@ -2,7 +2,7 @@
  * @Author: abc
  * @Date: 2020-12-03 14:34:34
  * @LastEditors: abc
- * @LastEditTime: 2020-12-29 16:53:31
+ * @LastEditTime: 2021-11-08 16:07:22
  * @Description: echarts line
 -->
 <template>
@@ -18,7 +18,12 @@
 <script>
 import echarts from '@/plugins/echarts';
 export default {
-  props: {},
+  props: {
+    websocketData: {
+      type: Object,
+      default: () => {}
+    }
+  },
   data() {
     return {
       value: true,
@@ -28,22 +33,30 @@ export default {
   computed: {},
   watch: {},
   created() {
-    this.$store.dispatch('websocketToken').then(() => {
-      const websocketData = this.$store.getters.postWebsocket;
-      //  console.log(JSON.stringify(websocketData));
-      this.getSocket(
-        websocketData,
-        this.handleDataSocket,
-        'blocktransactionlist'
-      );
-    });
+    this.handleBlockTpslist();
   },
   mounted() {},
   methods: {
+    async handleBlockTpslist() {
+      const res = await this.$http.get(`/block_tpslist`);
+      console.log(res);
+      if (res.code === 0) {
+        const { data } = res;
+        if (data.length) {
+          this.handleDataSocket(data);
+        } else {
+          this.handleDataSocket([]);
+        }
+        this.getSocket(
+          this.websocketData,
+          this.handleDataSocket,
+          'blocktransactionlist'
+        );
+      }
+    },
     handleDataSocket(data) {
       console.log(data);
       this.echartsLoading = false;
-
       if (!this.echartsLoading) {
         this.$nextTick(() => {
           const chartData = this.arrDataCharts(data);
@@ -51,10 +64,9 @@ export default {
         });
       }
     },
-    arrDataCharts(obj) {
+    arrDataCharts(arr) {
       //console.log(JSON.stringify(obj));
-      const arrBlock = obj.data;
-      if (!obj.data) {
+      if (!arr.length) {
         return [];
       } else {
         const arrBlockCharts = {
@@ -62,10 +74,10 @@ export default {
           size: [],
           xAxis: []
         };
-        for (let i = 0; i < arrBlock.length; i++) {
-          arrBlockCharts.transcations.push(arrBlock[i].block_transcations);
-          arrBlockCharts.size.push(arrBlock[i].block_size);
-          arrBlockCharts.xAxis.push(arrBlock[i].block_id);
+        for (let i = 0; i < arr.length; i++) {
+          arrBlockCharts.transcations.push(arr[i].block_transcations);
+          arrBlockCharts.size.push(arr[i].block_size);
+          arrBlockCharts.xAxis.push(arr[i].block_id);
         }
         return arrBlockCharts;
       }

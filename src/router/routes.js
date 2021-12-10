@@ -2,7 +2,7 @@
  * @Author: abc
  * @Date: 2020-11-06 10:47:41
  * @LastEditors: abc
- * @LastEditTime: 2020-12-28 17:55:34
+ * @LastEditTime: 2021-11-08 14:54:25
  * @Description:page route
  */
 const routes = [
@@ -46,7 +46,7 @@ const routes = [
         }
       },
       {
-        path: ':name/:node',
+        path: ':name',
         name: 'DataDetails',
         component: () =>
           import(
